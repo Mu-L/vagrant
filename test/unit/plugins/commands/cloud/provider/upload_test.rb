@@ -21,16 +21,11 @@ describe VagrantPlugins::CloudCommand::ProviderCommand::Command::Upload do
     let(:argv) { [] }
     let(:options) { {} }
     let(:env) { double("env", ui: ui) }
-    let(:ui) { double("ui") }
+    let(:ui) { Vagrant::UI::Silent.new }
     let(:upload_url) { double("upload-url") }
     let(:uploader) { double("uploader") }
 
     before do
-      allow(ui).to receive(:info)
-      allow(ui).to receive(:output)
-      allow(ui).to receive(:warn)
-      allow(ui).to receive(:success)
-      allow(ui).to receive(:error)
       allow(I18n).to receive(:t)
       allow(env).to receive(:ui).and_return(ui)
       allow(VagrantCloud::Account).to receive(:new).

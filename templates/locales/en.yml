@@ -1293,6 +1293,9 @@ en:
         A file or directory you're attempting to include with your packaged
         box has symlinks in it. Vagrant cannot include symlinks in the
         resulting package. Please remove the symlinks and try again.
+      package_invalid_info: |-
+        The information file that you've attempted to include doesn't exist or isn't a valid JSON file.
+        Please check that the file exists and is titled 'info.json' and try again.
       provider_cant_install: |-
         The provider '%{provider}' doesn't support automatic installation.
         This is a limitation of this provider. Please report this as a feature
@@ -2882,7 +2885,7 @@ en:
           Vagrant has detected a host range pattern in the `groups` option.
           Vagrant doesn't fully check the validity of these parameters!
 
-          Please check https://docs.ansible.com/ansible/intro_inventory.html#hosts-and-groups
+          Please check https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#inventory-basics-formats-hosts-and-groups
           for more information.
         cannot_detect: |-
           Vagrant does not support detecting whether Ansible is installed

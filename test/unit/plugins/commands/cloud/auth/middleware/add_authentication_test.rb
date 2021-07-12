@@ -6,7 +6,7 @@ describe VagrantPlugins::CloudCommand::AddAuthentication do
   include_context "unit"
 
   let(:app) { lambda { |env| } }
-  let(:ui) { double("ui") }
+  let(:ui) { Vagrant::UI::Silent.new }
   let(:env) { {
     env: iso_env,
     ui: ui
@@ -21,7 +21,6 @@ describe VagrantPlugins::CloudCommand::AddAuthentication do
 
   before do
     allow(Vagrant).to receive(:server_url).and_return(server_url)
-    allow(ui).to receive(:warn)
     allow(VagrantPlugins::CloudCommand::Client).to receive(:new).
       with(iso_env).and_return(client)
     stub_env("ATLAS_TOKEN" => nil)
@@ -46,6 +45,25 @@ describe VagrantPlugins::CloudCommand::AddAuthentication do
       subject.call(env)
 
       expect(env[:box_urls]).to eq(original)
+    end
+
+    context "when urls are set" do
+      it "does not modify urls" do
+        original = ["https://example.com/boxes/test.box",
+          "file://C:/my/box/path/local.box"]
+        env[:box_urls] = original.dup
+        subject.call(env)
+        expect(env[:box_urls]).to eq(original)
+      end
+
+      it "should remove access_token parameters when found" do
+        env[:box_urls] = ["https://example.com/boxes/test.box?access_token=TEST",
+          "file://C:/my/box/path/local.box"]
+        subject.call(env)
+        expect(env[:box_urls]).to eq([
+          "https://example.com/boxes/test.box",
+          "file://C:/my/box/path/local.box"])
+      end
     end
 
     context "with VAGRANT_SERVER_ACCESS_TOKEN_BY_URL set" do
@@ -104,7 +122,7 @@ describe VagrantPlugins::CloudCommand::AddAuthentication do
         expected[3] = expected[3] + "?access_token=#{token}"
 
         expect(subject).to receive(:sleep).once
-        expect(ui).to receive(:warn).once
+        expect(ui).to receive(:warn).once.and_call_original
 
         env[:box_urls] = original.dup
         subject.call(env)

@@ -4,11 +4,47 @@ FEATURES:
 
 IMPROVEMENTS:
 
-- guest/linux: Detect in process shutdown in reboot capability [GH-12302]
+BUG FIXES:
+
+- core: Fix of plugin manager kwargs [GH-12452]
+- providers/docker: Pass in docker command opts as a map [GH-12449]
+
+## 2.2.17 (July 7, 2021)
+
+FEATURES:
+
+- guest/rocky: Add guest support for Rocky Linux [GH-12440]
+
+IMPROVEMENTS:
+
+- command/package: Add --info flag to package command [GH-12304]
+- guest/debian: Retry network setup on debain [GH-12421]
+- guest/suse: Use systemctl poweroff in the background instead of shutdown [GH-12439]
+- guest/windows: Get powershell path in %WINDIR%/System32 [GH-12436]
+- host/windows: Check Domain and Application Directory contexts for credentials when validating SMB creds [GH-12428]
+- providers/hyper-v: Fix IP detection when multiple devices are attached [GH-12232]
+- provisioner/ansible: Detects new versions of ansible-4.0.0+ [GH-12391]
+- provisioner/ansible: Strip whitespace from ansible version [GH-12420]
+- provisioner/salt: Always use upstream Salt bootstrap script on Windows [GH-12127]
+- provisioner/salt: Use more conservative TLS settings to work on older .NET versions [GH-12413]
+- provisioner/shell: Buffer output to display full lines [GH-12437]
+- vagrant: Updates to support Ruby 3.0 [GH-12427]
 
 BUG FIXES:
 
+- command/cloud: Fix authentication middleware to prevent breaking local paths [GH-12419]
+- communicator/ssh: Fix net-ssh patches for RSA signatures [GH-12415]
 - core: Add box directly with authed urls [GH-12278]
+
+## 2.2.16 (April 29, 2021)
+
+IMPROVEMENTS:
+
+- guest/linux: Detect in process shutdown in reboot capability [GH-12302]
+- util/powershell: Support `pwsh` executable in new versions of powershell [GH-12335]
+
+BUG FIXES:
+
 - communicator/ssh: Properly handle authentication with RSA keys [GH-12298]
 - guest/fedora: Import guest detection module [GH-12275]
 - guest/linux: Fix SMB folder mount name capability call [GH-12281]
