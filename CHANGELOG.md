@@ -1,14 +1,30 @@
-## 2.4.5.dev (UNRELEASED)
+## 2.4.6.dev (UNRELEASED)
 
 FEATURES:
 
 IMPROVEMENTS:
 
+- core: Improve error messages on box add failures [GH-13660]
+- core: Only generate and attach ISO for cloud-init on first boot [GH-13666]
+- provider/virtualbox: Allow link-local IPv6 addresses for hostonly [GH-12653]
+
 BUG FIXES:
 
-## 2.4.4 (April 21, 2025)
+- command: Remove server mode checks [GH-13657]
+- core: Prevent cloud-init from regenerating and attaching ISO [GH-13666]
+- provider/virtualbox: Fix VirtualBox private network setup [GH-13659]
+
+## 2.4.5 (April 23, 2025)
 
 FEATURES:
+
+- communicator/none: Add experimental none communicator [GH-13651]
+
+BUG FIXES:
+
+- core/bundler: Handle multiple versions for system specifications [GH-13652]
+
+## 2.4.4 (April 21, 2025)
 
 IMPROVEMENTS:
 
